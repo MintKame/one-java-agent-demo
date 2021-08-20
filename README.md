@@ -18,14 +18,6 @@ docker run --rm -it --link jaeger -e JAEGER_AGENT_HOST="jaeger" --name oneagent_
 
 ## 3. 运行demo
 
-### dubbo
-
-```bash
-java -javaagent:/usr/tracedemo/oneagent/core/oneagent@0.0.2-SNAPSHOT/one-java-agent.jar \
-	-cp /usr/tracedemo/demo/trace-dubbo-demo/target/trace-dubbo-demo.jar \
-	com.trace.demo.dubbo.DubboDemo
-```
-
 
 ### httpClient
 
