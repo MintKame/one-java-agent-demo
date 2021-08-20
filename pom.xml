@@ -18,8 +18,8 @@
     <url>https://github.com/alibaba/one-java-agent</url>
 
     <modules>
-        <!-- <module>trace-dubbo-demo</module>
-        <module>trace-rocketMQ-demo</module> -->
+        <!-- <module>trace-dubbo-demo</module> -->
+        <module>trace-rocketMQ-demo</module>
         <module>trace-httpClient-demo</module>
     </modules>
 
@@ -28,13 +28,6 @@
         <maven.compiler.target>1.6</maven.compiler.target>
         <maven.compiler.source>1.6</maven.compiler.source>
     </properties>
-
-    <dependencyManagement>
-    </dependencyManagement>
-
-    <dependencies>
-    </dependencies>
-
 
     <build> 
         <plugins>
