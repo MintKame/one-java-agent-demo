@@ -1,0 +1,8 @@
+FROM openjdk:8-jre-alpine
+
+WORKDIR /usr/tracedemo
+
+COPY rocketmq-all-4.9.0 ./rocketmq-all-4.9.0
+COPY start.sh ./start.sh
+
+CMD /usr/tracedemo/start.sh

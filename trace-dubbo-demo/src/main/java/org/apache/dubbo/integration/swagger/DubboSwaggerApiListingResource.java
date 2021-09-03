@@ -35,7 +35,7 @@ public class DubboSwaggerApiListingResource extends BaseApiListingResource imple
 
     @Context
     ServletContext context;
-
+    
     @Override
     public Response getListingJson(Application app, ServletConfig sc,
                                    HttpHeaders headers, UriInfo uriInfo)  throws JsonProcessingException {

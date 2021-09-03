@@ -1,0 +1,66 @@
+version: "3.7"
+services:
+    trace-httpclient-demo:
+        container_name: trace-httpclient-demo
+        build: ./trace-httpClient-demo
+        depends_on:
+            - jaeger
+        links:
+            - jaeger
+        environment:
+            - JAEGER_AGENT_HOST=jaeger 
+        
+    trace-rocketmq-demo-producer:
+        container_name: trace-rocketmq-demo-producer
+        build: 
+            context: ./trace-rocketMQ-demo
+            dockerfile: Dockerfile.producer
+        depends_on:
+            - jaeger
+            - rocketmq
+        links:
+            - jaeger
+            - rocketmq
+        environment:
+            - JAEGER_AGENT_HOST=jaeger
+            - NAMESRV_ADDR=rocketmq 
+
+    trace-rocketmq-demo-consumer:
+        container_name: trace-rocketmq-demo-consumer
+        build: 
+            context: ./trace-rocketMQ-demo
+            dockerfile: Dockerfile.consumer
+        depends_on:
+            - jaeger
+            - rocketmq
+            - trace-rocketmq-demo-producer
+        links:
+            - jaeger
+            - rocketmq
+        environment:
+            - JAEGER_AGENT_HOST=jaeger
+            - NAMESRV_ADDR=rocketmq 
+    
+    trace-dubbo-demo:
+        container_name: trace-dubbo-demo
+        build: 
+            context: ./trace-dubbo-demo 
+        depends_on:
+            - jaeger 
+        links:
+            - jaeger 
+        environment:
+            - JAEGER_AGENT_HOST=jaeger  
+
+    jaeger:
+        container_name: jaeger
+        image: jaegertracing/all-in-one:1.16
+        ports:
+            - "16686:16686"
+            - "14250:14250"
+            
+    rocketmq:
+        container_name: rocketmq
+        build: 
+            context: ./trace-rocketMQ-demo
+            dockerfile: Dockerfile.rocketmq

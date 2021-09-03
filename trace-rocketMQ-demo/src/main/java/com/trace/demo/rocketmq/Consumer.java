@@ -60,7 +60,11 @@ public class Consumer {
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
             }
         });
-        consumer.setNamesrvAddr("127.0.0.1:9876");
+        String namesrvAddr = System.getenv("NAMESRV_ADDR");
+        if(namesrvAddr == null || namesrvAddr.isEmpty()){
+            namesrvAddr = "127.0.0.1";
+        }
+        consumer.setNamesrvAddr(namesrvAddr + ":9876"); 
         /*
          *  Launch the consumer instance.
          */
