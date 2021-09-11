@@ -41,16 +41,31 @@ services:
             - JAEGER_AGENT_HOST=jaeger
             - NAMESRV_ADDR=rocketmq 
     
-    trace-dubbo-demo:
-        container_name: trace-dubbo-demo
+    trace-dubbo-demo-producer:
+        container_name: trace-dubbo-demo-producer
         build: 
             context: ./trace-dubbo-demo 
+            dockerfile: Dockerfile.producer
         depends_on:
             - jaeger 
         links:
             - jaeger 
         environment:
             - JAEGER_AGENT_HOST=jaeger  
+
+    trace-dubbo-demo-consumer:
+        container_name: trace-dubbo-demo-consumer
+        build: 
+            context: ./trace-dubbo-demo 
+            dockerfile: Dockerfile.consumer
+        depends_on:
+            - jaeger 
+            - trace-dubbo-demo-producer
+        links:
+            - jaeger 
+            - trace-dubbo-demo-producer
+        environment:
+            - JAEGER_AGENT_HOST=jaeger 
 
     jaeger:
         container_name: jaeger
