@@ -34,18 +34,18 @@ public class Producer {
         DefaultMQProducer producer = new DefaultMQProducer("defaultMQProducer");
 
         // 在这里设置 NameServer 地址，保证  Producer 可以从 NameServer 获取到 Broker 地址
-        String namesrvAddr = System.getenv("NAMESRV_ADDR");
-        if(namesrvAddr == null || namesrvAddr.isEmpty()){
-            namesrvAddr = "127.0.0.1";
-        } 
-        producer.setNamesrvAddr(namesrvAddr + ":9876");
+        String addr = System.getenv ("NAMESRV_ADDR");
+        if(addr == null || addr.equals("")){
+            addr = "127.0.0.1";
+        }
+        producer.setNamesrvAddr(addr + ":9876");
         /*
          * Launch the instance.
          */
         producer.start();
 
         // 发送 3 条消息
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) { 
             try {
                 /*
                  * Create a message instance, specifying topic, tag and message body.

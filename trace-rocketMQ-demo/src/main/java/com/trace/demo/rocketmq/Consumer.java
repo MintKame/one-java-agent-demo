@@ -59,12 +59,12 @@ public class Consumer {
                 System.out.printf("%s Receive New Messages: %s %n", Thread.currentThread().getName(), msgs);
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
             }
-        });
-        String namesrvAddr = System.getenv("NAMESRV_ADDR");
-        if(namesrvAddr == null || namesrvAddr.isEmpty()){
-            namesrvAddr = "127.0.0.1";
+        }); 
+        String addr = System.getenv ("NAMESRV_ADDR");
+        if(addr == null || addr.equals("")){
+            addr = "127.0.0.1";
         }
-        consumer.setNamesrvAddr(namesrvAddr + ":9876"); 
+        consumer.setNamesrvAddr(addr + ":9876");
         /*
          *  Launch the consumer instance.
          */
